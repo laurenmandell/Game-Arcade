@@ -1,0 +1,50 @@
+.board {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows:repeat(6, 1fr);
+    gap: 10px; /* Space between cells */
+    margin: 20px auto; /* Centering the grid */
+    max-width: 700px; /* Restricting the maximum width of the grid */
+    border: 4px solid #333;
+    padding: 20px;
+}
+
+.cell {
+    background-color: #fff;
+    border: 2px solid #333;
+    font-size: 48px;
+    font-weight: bold;
+    cursor: pointer;
+    aspect-ratio: 1 / 1; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px; /* Set a fixed height for better visual */
+    color: #444; /* Default text color */
+    border-radius: 50%;
+}
+
+.cell.red { 
+    background-color: red; 
+    cursor: default; 
+    pointer-events: none;
+}
+.cell.black { 
+    background-color: black;
+    cursor: default;  
+    pointer-events: none;
+}
+
+.cell:hover {
+    background-color: #eaeaea; /* Hover effect for cells */
+}
+
+#resultDisplay{
+    font-size: 24px;
+    margin: 20px;
+}
+
+#scoreDisplay{
+    font-size: 24px;
+    margin: 20px;
+}

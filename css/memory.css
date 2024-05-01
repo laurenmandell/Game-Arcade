@@ -23,6 +23,7 @@
 .card.matched {
     background-color: #999696;
     cursor: default; 
+    pointer-events: none;
 }
 
 .card.flip {
