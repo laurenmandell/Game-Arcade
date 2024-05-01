@@ -1,8 +1,11 @@
 const cards = document.querySelectorAll('.card');
+let currentPlayer = '1';
+let numPlayers = "one"; // Default to 1 player
 let gameActive = true;
 let flippedCards = [];
 let matchedCards = [];
-let numTurns = 0; // score
+let player1Score = 0;
+let player2Score = 0;
 const totalPairs = cards.length / 2;
 
 // Array to hold the values for each pair of cards
@@ -33,13 +36,27 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('restartButton').addEventListener('click', restartGame);
 });
 
+// get the number of players from the radio button
+//
+function getNumPlayers() {
+    let radios = document.getElementsByName('numPlayers');
+    for (let i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+            return radios[i].value;
+        }
+    }
+}
+
+numPlayers = getNumPlayers();
+
 // whenever the user clicks the restart game button
 // we initialize the game state
 function restartGame() {
     gameActive = true;
     flippedCards = [];
     matchedCards = [];
-    // document.getElementById('resultDisplay').innerText = "Player 1's turn";
+    player1Score = 0;
+    player2Score = 0;
 
     // Shuffle the card values array 
     shuffledValues = shuffleCards([...cardValues, ...cardValues]);
@@ -49,16 +66,14 @@ function restartGame() {
         card.innerHTML = "?";
         card.className = 'card';
     });
-}
 
-// get the number of players from the radio button
-//
-function getNumPlayers() {
-    let radios = document.getElementsByName('numPlayers');
-    for (let i = 0; i < radios.length; i++) {
-        if (radios[i].checked) {
-            return radios[i].value;
-        }
+    numPlayers = getNumPlayers();
+    if (numPlayers === "two") {
+        document.getElementById('resultDisplay').innerText = "Player 1's turn";
+        document.getElementById('scoreDisplay').innerText = "Player 1's Score: " + player1Score + "\nPlayer 2's Score: " + player2Score;
+    } else {
+        document.getElementById('resultDisplay').innerText = "";
+        document.getElementById('scoreDisplay').innerText = "Score: " + player1Score;
     }
 }
 
@@ -87,9 +102,11 @@ function handleCardClick(clickedCardEvent) {
 function updateGameStatus() {
     // Check if two cards are flipped
     if (flippedCards.length % 2 === 0) {
-        numTurns++
         // Update score
-        document.getElementById('scoreDisplay').innerText = "Score: " + numTurns;
+        if (numPlayers === "one") {
+            player1Score++;
+            document.getElementById('scoreDisplay').innerText = "Score: " + player1Score;
+        }
         const firstCardIndex = flippedCards[flippedCards.length - 2].getAttribute("data-card-index");
         const secondCardIndex = flippedCards[flippedCards.length - 1].getAttribute("data-card-index");
         const firstCardValue = shuffledValues[firstCardIndex];
@@ -98,11 +115,28 @@ function updateGameStatus() {
         if (firstCardValue === secondCardValue) {
             // Matched
             matchedCards.push(cards[firstCardIndex]);
-
+            if (numPlayers === "two") {
+                if (currentPlayer === '1') {
+                    player1Score++;
+                } else {
+                    player2Score++;
+                }
+                document.getElementById('scoreDisplay').innerText = "Player 1's Score: " + player1Score + "\nPlayer 2's Score: " + player2Score;
+            }
             if (matchedCards.length === totalPairs) {
                 // All pairs matched
                 gameActive = false;
-                document.getElementById('resultDisplay').innerText = 'You win!';
+                if (numPlayers === "one") {
+                    document.getElementById('resultDisplay').innerText = 'You win!';
+                } else {
+                    if (player1Score === player2Score) {
+                        document.getElementById('resultDisplay').innerText = 'Tie game!';
+                    } else if (player1Score > player2Score) {
+                        document.getElementById('resultDisplay').innerText = 'Player 1 wins!';
+                    } else {
+                        document.getElementById('resultDisplay').innerText = 'Player 2 wins!';
+                    }
+                }
                 return;
             }
         } else {
@@ -114,9 +148,16 @@ function updateGameStatus() {
                 flippedCards[flippedCards.length - 1].classList.remove("flip");
                 flippedCards.pop();
                 flippedCards.pop();
-            }, 1000);
+            }, 750);
+            if (numPlayers === "two") {
+                togglePlayer();
+            }
         }
-
     }
+}
+
+function togglePlayer() {
+    currentPlayer = currentPlayer === '1' ? '2' : '1';
+    document.getElementById('resultDisplay').innerText = "Player " + currentPlayer + "'s turn";
 }
 

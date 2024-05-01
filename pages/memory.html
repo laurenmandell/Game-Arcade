@@ -15,9 +15,9 @@
         <h2>Memory</h2>
         <div id="numPlayerSelect">
             <label>Number of Players:</label>
-            <input type="radio" name="numPlayers" value="1" checked>
+            <input type="radio" name="numPlayers" id="one" value = "one" checked>
             1 Player
-            <input type="radio" name="numPlayers" value="2"> 2 Players
+            <input type="radio" name="numPlayers" id="two" value="two"> 2 Players
         </div>
         <div id="gameBoard" class="board">
             <!-- Creating 16 cards for the Memory grid -->
@@ -40,7 +40,7 @@
         </div>
         <div id="resultDisplay"></div>
         <div id="scoreDisplay">Score: 0</div>
-        <button id="restartButton" onclick="restartGame()">Restart Game</button>
+        <button id="restartButton" onclick="restartGame()">Start New Game</button>
     </div>
     
     <footer>
