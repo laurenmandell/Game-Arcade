@@ -109,7 +109,7 @@ function togglePlayer() {
 function checkWinner() {
 
     // if the board is such that the same board state exists
-    // in a winning conndition, then that player has won the game
+    // in a winning condition, then that player has won the game
     //
     for (let condition of winningConditions) {
         const [a, b, c] = condition.map(index => gameState[index]);

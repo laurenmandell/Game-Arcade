@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory - Game Arcade</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/memory.css">
+</head>
+<body>
+    <header>
+        <h1> <a href="../index.html">Game Arcade</a></h1>
+    </header>
+    <div id="gameContainer" class="game-play-area">
+        <h2>Memory</h2>
+        <div id="numPlayerSelect">
+            <label>Number of Players:</label>
+            <input type="radio" name="numPlayers" value="1" checked>
+            1 Player
+            <input type="radio" name="numPlayers" value="2"> 2 Players
+        </div>
+        <div id="gameBoard" class="board">
+            <!-- Creating 16 cards for the Memory grid -->
+            <button class="card" data-card-index="0"></button>
+            <button class="card" data-card-index="1"></button>
+            <button class="card" data-card-index="2"></button>
+            <button class="card" data-card-index="3"></button>
+            <button class="card" data-card-index="4"></button>
+            <button class="card" data-card-index="5"></button>
+            <button class="card" data-card-index="6"></button>
+            <button class="card" data-card-index="7"></button>
+            <button class="card" data-card-index="8"></button>
+            <button class="card" data-card-index="9"></button>
+            <button class="card" data-card-index="10"></button>
+            <button class="card" data-card-index="11"></button>
+            <button class="card" data-card-index="12"></button>
+            <button class="card" data-card-index="13"></button>
+            <button class="card" data-card-index="14"></button>
+            <button class="card" data-card-index="15"></button>
+        </div>
+        <div id="resultDisplay"></div>
+        <div id="scoreDisplay">Score: 0</div>
+        <button id="restartButton" onclick="restartGame()">Restart Game</button>
+    </div>
+    
+    <footer>
+        <p>Copyright &copy; 2024 Game Arcade</p>
+    </footer>
+
+    <script src="../js/memory.js"></script>
+</body>
+</html>

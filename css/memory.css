@@ -1,0 +1,46 @@
+.board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 20 px auto;
+    max-width: 460px;
+}
+.card {
+    background-color: #FFFFFF;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    margin: 10px;
+    font-size: 24px;
+    display: flex;
+    transition: background-color 0.3s ease;
+}
+
+.card.matched {
+    background-color: #999696;
+    cursor: default; 
+}
+
+.card.flip {
+    background-color: #2574b4;
+    cursor: default;
+    pointer-events: none;
+}
+
+.card:hover {
+    background-color: #eaeaea;
+}
+
+#resultDisplay{
+    font-size: 24px;
+    margin: 20px;
+}
+
+#scoreDisplay{
+    font-size: 24px;
+    margin: 20px;
+}

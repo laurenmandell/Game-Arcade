@@ -25,10 +25,20 @@ section {
     margin: 1em 0em 1em 0em;
 }
 
-a {
-    color: #8AC08C;
+button {
+    padding: 10px 20px;
+    background-color: #8AC08C;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
-a:hover {
-    color: #377153;
+button:hover {
+    background-color: #377153;
+}
+
+#tictactoe {
+    background-color: #FFFFFF;
 }
