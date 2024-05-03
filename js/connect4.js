@@ -93,14 +93,11 @@ function updateGameStatus() {
 
 function togglePlayer() {
     currentPlayer = currentPlayer === '1' ? '2' : '1';
-    if (currentPlayer === '2' && gameActive) {
-        let numPlayers = getNumPlayers();
-        if (numPlayers === "one") {
-            document.getElementById('resultDisplay').innerText = "Bot's turn";
-            computerMove();
-        } else {
-            document.getElementById('resultDisplay').innerText = "Player " + currentPlayer + "'s turn";
-        }
+    if (currentPlayer === '2' && gameActive && getNumPlayers() === "one") {
+        document.getElementById('resultDisplay').innerText = "Bot's turn";
+        computerMove();
+    } else {
+        document.getElementById('resultDisplay').innerText = "Player " + currentPlayer + "'s turn";
     }
 }
 
@@ -197,4 +194,12 @@ function checkDiagonalWin() {
     }
 
     return false;
+}
+
+function computerMove() { // TODO
+    // Medium difficulty bot
+    // Check if bot can win in next move
+    // Check if player cna win in next move and block them
+    // if no winning or blocking move, make a random move
+
 }
