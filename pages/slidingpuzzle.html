@@ -11,18 +11,21 @@
 
 <body>
   <header>
-    <h1><a href="../index.html">Game Arcade</a></h1>
+    <h1><a href="../index.html">Back to Game Arcade</a></h1>
   </header>
-  <h2>Sliding Puzzle</h2>
-  <div id="tiles"></div>
-  <div id="win-text"></div>
-  <button id="new-game-button" onclick="newGame()">Shuffle</button>
+  <div id="gameContainer" class="game-play-area">
+    <h2>Sliding Puzzle</h2>
+    <button id="new-game-button" onclick="newGame()">Shuffle</button>
+    <div id="tiles"></div>
+    <div id="win-text"></div>
+  </div>
   <footer>
-    This project utilizes code from
-    <a href="https://github.com/BrightScreenTV/sliding-puzzle/tree/main">BrightScreenTV's sliding-puzzle repository</a>,
-    which is licensed under the MIT License. The full text of the license
-    can be found
-    <a href="https://github.com/BrightScreenTV/sliding-puzzle/blob/main/LICENSE">here</a>.
+    <p1>
+      This project utilizes code from
+      <a href="https://github.com/BrightScreenTV/sliding-puzzle/tree/main">BrightScreenTV's sliding-puzzle repository</a>,
+      which is licensed under the MIT License. The full text of the license can be found <a href="https://github.com/BrightScreenTV/sliding-puzzle/blob/main/LICENSE">here</a>.
+    </p1> <br>
+    <p2>Copyright &copy; 2024 Lauren Mandell</p2>
   </footer>
   <script src="../js/slidingpuzzle.js" type="text/javascript"></script>
 </body>

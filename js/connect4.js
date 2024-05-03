@@ -1,5 +1,5 @@
 /*
-This Connect 4 Implementation was based heavily on Professor Posnett's Tic Tac Toe code.
+This Connect 4 Implementation was adapted from Professor Posnett's Tic Tac Toe code.
 */
 const cells = document.querySelectorAll('.cell');
 let currentPlayer = '1'; // Player 1 always goes first
@@ -90,9 +90,13 @@ function updateGameStatus() {
 
 function togglePlayer() {
     currentPlayer = currentPlayer === '1' ? '2' : '1';
-    if (gameActive && getNumPlayers() === "one" && currentPlayer === '2') {
+    if (getNumPlayers() === "one" && currentPlayer === '2') {
         document.getElementById('resultDisplay').innerText = "Bot's turn";
-        staticEvaluatorComputerMove();
+        setTimeout(() => {
+            staticEvaluatorComputerMove(); // Make the bot move after a delay
+        }, 1000);
+    } else if (getNumPlayers() === "one" && currentPlayer === '1') {
+        document.getElementById('resultDisplay').innerText = "Your turn";
     } else {
         document.getElementById('resultDisplay').innerText = "Player " + currentPlayer + "'s turn";
     }
@@ -220,7 +224,7 @@ function staticEvaluatorComputerMove() {
         if (r !== -1) {
             // Test for blocking user from winning
             currentPlayer = '1'; // Temporarily change current player to call checkWinner accurately
-            gameState[r][c] = '1'; 
+            gameState[r][c] = '1';
             if (checkWinner() === '1') {
                 currentPlayer = '2'; // Reset value
                 handleCellPlayed(c, r);

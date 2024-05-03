@@ -1,3 +1,6 @@
+/*
+This is open source code that was adapted from BrightScreenTV's sliding-puzzle repository.
+*/
 let size = 4;
 let numberOfTiles = size ** 2;
 let blankedTileIndex = numberOfTiles;
@@ -26,18 +29,21 @@ window.onkeydown = function (event) {
 newGame(true);
 
 function newGame(isFirstGame) {
-    if (!isFirstGame) {
-        buttonContainer.innerHTML = "";
-        const winTextDiv = document.getElementById("win-text");
-        winTextDiv.innerHTML = "";
-        blankedTileIndex = numberOfTiles;
+    if (isFirstGame) {
+      loadTiles();
+      return;
     }
-
+  
+    buttonContainer.innerHTML = "";
+    const winTextDiv = document.getElementById("win-text");
+    winTextDiv.innerHTML = "";
+    blankedTileIndex = numberOfTiles;
+  
     loadTiles();
-
+  
     shuffled = false;
     setTimeout(() => {
-        shuffle();
+      shuffle();
     }, 100);
 }
 

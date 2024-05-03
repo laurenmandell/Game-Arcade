@@ -1,6 +1,17 @@
-body {
+header {
+    background-color: #8AC08C;
+}
+
+header:hover{
+    background-color:#377153;
+    transform: scale(1.05);
+}
+
+#gameContainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
   
 footer {
@@ -29,7 +40,8 @@ footer {
 #new-game-button {
     padding: 10px;
     width: auto;
-    margin: 10px auto auto;
+    margin: 10px auto 20px;
+    font-size: 30px;
 }
   
 .blanked {

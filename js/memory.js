@@ -1,5 +1,5 @@
 /*
-This Memory Implementation was based heavily on Professor Posnett's Tic Tac Toe code.
+This Memory Implementation was adapted from Professor Posnett's Tic Tac Toe code.
 */
 const cards = document.querySelectorAll('.card');
 let currentPlayer = '1'; // Player 1 always goes first

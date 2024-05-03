@@ -11,7 +11,7 @@
 
 <body>
   <header>
-    <h1><a href="../index.html">Game Arcade</a></h1>
+    <h1><a href="../index.html">Back to Game Arcade</a></h1>
   </header>
 
   <div id="gameContainer" class="game-play-area">
@@ -23,6 +23,8 @@
       <input type="radio" name="numPlayers" id="two" value="two" />
       2 Players
     </div>
+    <button id="restartButton" onclick="restartGame()">Start New Game</button>
+    <div id="resultDisplay"></div>
     <div id="gameBoard" class="board">
       <!-- Creating 6 x 7 grid  for the Connect 4 board -->
       <button class="cell" data-cell-index="0"></button>
@@ -68,12 +70,11 @@
       <button class="cell" data-cell-index="40"></button>
       <button class="cell" data-cell-index="41"></button>
     </div>
-    <div id="resultDisplay"></div>
-    <button id="restartButton" onclick="restartGame()">Start New Game</button>
   </div>
 
   <footer>
-    <p>Copyright &copy; 2024 Game Arcade</p>
+    <p>Copyright &copy; 2024 Lauren Mandell</p>
+    <!-- This code was adapted from Professor Posnett's Tic Tac Toe code-->
   </footer>
 
   <script src="../js/connect4.js"></script>

@@ -10,7 +10,7 @@
 
   <body>
     <header>
-      <h1><a href="../index.html">Lauren Mandell's Game Arcade</a></h1>
+      <h1><a href="../index.html">Back to Game Arcade</a></h1>
     </header>
 
     <div id="gameContainer" class="game-play-area">
@@ -28,6 +28,8 @@
         Medium
         <input type="radio" name="difficulty" id="hard" value="hard" /> Hard
       </div>
+      <button id="restartButton" onclick="restartGame()">Start New Game</button>
+      <div id="resultDisplay"></div>
       <div id="gameBoard" class="board">
         <!-- Creating 9 cells for the Tic Tac Toe grid -->
         <button class="cell" data-cell-index="0"></button>
@@ -40,12 +42,11 @@
         <button class="cell" data-cell-index="7"></button>
         <button class="cell" data-cell-index="8"></button>
       </div>
-      <div id="resultDisplay">Player X's turn</div>
-      <button id="restartButton" onclick="restartGame()">Restart Game</button>
     </div>
 
     <footer>
-      <p>Copyright &copy; 2024 Game Arcade</p>
+      <p>Copyright &copy; 2024 Lauren Mandell</p>
+      <!-- This code was adapted from Professor Posnett's Tic Tac Toe code-->
     </footer>
 
     <script src="../js/tictactoe.js"></script>
