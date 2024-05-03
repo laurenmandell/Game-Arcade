@@ -1,0 +1,51 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+  
+footer {
+    margin-top: auto;
+}
+  
+#tiles {
+    width: 90%;
+    height: 50vh;
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #ffe1ec;
+    padding: 12px;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(240, 165, 176, 0.5);
+    text-align: center;
+}
+  
+#win-text {
+    position: relative;
+    text-align: center;
+    margin-top: 10px;
+}
+  
+#new-game-button {
+    padding: 10px;
+    width: auto;
+    margin: 10px auto auto;
+}
+  
+.blanked {
+    background-color: #ffe1ec !important;
+    border: none !important;
+    color: transparent;
+}
+  
+.blanked, .btn {
+    font-size: 22px;
+    height: calc((90% - 2px * 5) / 4);
+    width: calc((90% - 2px * 5) / 4);
+    cursor: pointer;
+    background-color: #e2654f;
+    border-radius: 1em;
+    border: 1px solid #994334;
+    margin: 3px;
+}
+  

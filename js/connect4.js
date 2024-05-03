@@ -1,3 +1,6 @@
+/*
+This Connect 4 Implementation was based heavily on Professor Posnett's Tic Tac Toe code.
+*/
 const cells = document.querySelectorAll('.cell');
 let currentPlayer = '1'; // Player 1 always goes first
 let numPlayers = "one"; // Default to 1 player

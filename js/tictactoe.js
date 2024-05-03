@@ -1,3 +1,6 @@
+/*
+This code was taken from Professor Posnett and was very minimally altered.
+*/
 const cells = document.querySelectorAll('.cell');
 let currentPlayer = 'X'; // Player X is always the human
 let gameActive = false;

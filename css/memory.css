@@ -2,14 +2,16 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-    margin: 20 px auto;
-    max-width: 460px;
+    margin: 0 auto;
+    max-width: 500px;
 }
+  
 .card {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border: 2px solid #ccc;
     border-radius: 10px;
-    cursor: pointer;aspect-ratio: 1 / 1;
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,9 +20,10 @@
     font-size: 24px;
     display: flex;
     transition: background-color 0.3s ease;
+    color: black;
 }
-
-.card.flip, .card.flip2 {
+  
+.card.flip, .card.flip2 { /* Different flips for each player */
     background-color: #2574B4;
     cursor: default;
     pointer-events: none;
@@ -29,17 +32,33 @@
 .card.flip2 {
     background-color: red;
 }
-
+  
 .card:hover {
     background-color: #eaeaea;
 }
-
-#resultDisplay{
+  
+#resultDisplay {
     font-size: 24px;
     margin: 20px;
 }
-
-#scoreDisplay{
+  
+#scoreDisplay {
     font-size: 24px;
     margin: 20px;
 }
+  
+@media screen and (max-width: 768px) {
+    .board {
+      grid-template-columns: repeat(4, minmax(60px, 1fr));
+      gap: 3px;
+      margin: 5px auto;
+      max-width: 80%;
+    }
+  
+    .card {
+      height: auto;
+      font-size: 20px;
+      margin: 3px;
+    }
+}
+  
