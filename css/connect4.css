@@ -31,9 +31,7 @@ header:hover{
     align-items: center;
     justify-content: center;
     height: 80px;
-    /* Set a fixed height for better visual */
     color: #444;
-    /* Default text color */
     border-radius: 50%;
 }
   
@@ -51,7 +49,6 @@ header:hover{
   
 .cell:hover {
     background-color: #eaeaea;
-    /* Hover effect for cells */
 }
   
 #resultDisplay {
