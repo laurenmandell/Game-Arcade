@@ -1,6 +1,6 @@
 const cells = document.querySelectorAll('.cell');
 let currentPlayer = 'X'; // Player X is always the human
-let gameActive = true;
+let gameActive = false;
 let gameState = ["", "", "", "", "", "", "", "", ""];
 
 // Winning conditions using the indices of the gameState array

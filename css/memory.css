@@ -20,16 +20,14 @@
     transition: background-color 0.3s ease;
 }
 
-.card.matched {
-    background-color: #999696;
-    cursor: default; 
+.card.flip, .card.flip2 {
+    background-color: #2574B4;
+    cursor: default;
     pointer-events: none;
 }
 
-.card.flip {
-    background-color: #2574b4;
-    cursor: default;
-    pointer-events: none;
+.card.flip2 {
+    background-color: red;
 }
 
 .card:hover {

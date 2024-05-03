@@ -1,8 +1,10 @@
 const cells = document.querySelectorAll('.cell');
-let currentPlayer = '1';
-let gameActive = true;
+let currentPlayer = '1'; // Player 1 always goes first
+let numPlayers = "one"; // Default to 1 player
+let gameActive = false; // User clicks start button to start a game
 const numRows = 6;
 const numCols = 7;
+// Array to keep track of game state
 let gameState = Array.from({ length: numRows }, () => Array.from({ length: numCols }, () => ""));
 
 // Event listeners to handle game start and cell interaction
@@ -13,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // whenever the user clicks the restart game button,
 // we reinitialize the game state
-//
 function restartGame() {
     gameActive = true;
     currentPlayer = '1';
@@ -29,7 +30,6 @@ function restartGame() {
 }
 
 // get the game settings from the radio button
-//
 function getNumPlayers() {
     let radios = document.getElementsByName('numPlayers');
     for (let i = 0; i < radios.length; i++) {
@@ -41,7 +41,6 @@ function getNumPlayers() {
 
 // Interact with the user by responding to clicks on the cells
 // and changing the cell state. 
-//
 function handleCellPlayed(clickedCol, availRow) {
     let targetCellIndex = (availRow * numCols) + clickedCol;
     let targetCell = cells[targetCellIndex];
@@ -62,7 +61,6 @@ function handleCellClick(clickedCellEvent) {
 
     // we respond to a click by handling the cell that has been played
     // and then updating the overall game status
-    //
     handleCellPlayed(clickedCol, availRow);
     updateGameStatus();
 }
@@ -70,7 +68,9 @@ function handleCellClick(clickedCellEvent) {
 function updateGameStatus() {
     const result = checkWinner();
     if (result) {
+        // Game Over
         gameActive = false;
+        // Different displays depending on outcome of game
         if (result === 'tie') {
             document.getElementById('resultDisplay').innerText = "Game Draw!";
         } else if (getNumPlayers() === "two") {
@@ -104,17 +104,19 @@ function checkWinner() {
     return null; // No winner yet
 }
 
+// Check if the board is full (there are no empty cells)
 function boardIsFull() {
     for (let r = 0; r < numRows; r++) {
         for (let c = 0; c < numCols; c++) {
             if (gameState[r][c] === "") {
-                return false; // there is an empty cell
+                return false; // There is an empty cell
             }
         }
     }
-    return true; // all cells are filled
+    return true; // All cells are filled
 }
 
+// Check if a player won with 4 in a row horizontally
 function checkHorizontalWin() {
     for (let r = 0; r < numRows; r++) {
         let count = 0;
@@ -125,13 +127,14 @@ function checkHorizontalWin() {
                     return true;
                 }
             } else {
-                count = 0; // reset the count since the cells are not consecutive
+                count = 0; // Reset the count since the cells are not consecutive
             }
         }
     }
     return false;
 }
 
+// Check if a player won with 4 in a row vertically
 function checkVerticalWin() {
     for (let c = 0; c < numCols; c++) {
         let count = 0;
@@ -142,13 +145,14 @@ function checkVerticalWin() {
                     return true;
                 }
             } else {
-                count = 0; // reset count since cells are not consecutive
+                count = 0; // Reset count since the cells are not consecutive
             }
         }
     }
     return false;
 }
 
+// Check if a player won with 4 in a row horizontally
 function checkDiagonalWin() {
     let count = 0;
 
@@ -163,7 +167,7 @@ function checkDiagonalWin() {
                         return true;
                     }
                 } else {
-                    count = 0; // reset
+                    count = 0; // Reset the count since the cells are not consecutive
                 }
             }
         }
@@ -192,7 +196,7 @@ function checkDiagonalWin() {
 
 function staticEvaluatorComputerMove() {
     // Medium difficulty bot -- static evaluator
-    // Check for immediate wins
+    // Check for possible wins
     for (let c = 0; c < numCols; c++) {
         let r = getAvailRow(c);
         if (r !== -1) {
@@ -207,20 +211,20 @@ function staticEvaluatorComputerMove() {
         }
     }
 
-    // Check for immediate blocks
+    // Check for possible blocks
     for (let c = 0; c < numCols; c++) {
         let r = getAvailRow(c);
         if (r !== -1) {
             // Test for blocking user from winning
-            currentPlayer = '1';
-            gameState[r][c] = '1';
+            currentPlayer = '1'; // Temporarily change current player to call checkWinner accurately
+            gameState[r][c] = '1'; 
             if (checkWinner() === '1') {
-                currentPlayer = '2';
+                currentPlayer = '2'; // Reset value
                 handleCellPlayed(c, r);
                 updateGameStatus();
                 return;
             }
-            currentPlayer = '2';
+            currentPlayer = '2'; // Reset value
             gameState[r][c] = ''; // Reset the cell
         }
     }
@@ -229,14 +233,15 @@ function staticEvaluatorComputerMove() {
     randomComputerMove();
 }
 
+// Select a random available column for the bot to choose
 function randomComputerMove() {
-    let availCols = [];
+    let availCols = []; // Store the available columns
     for (let c = 0; c < numCols; c++) {
         if (getAvailRow(c) !== -1) {
             availCols.push(c);
         }
     }
-    if (availCols.length > 0) {
+    if (availCols.length > 0) { // There is an available spot
         const randCol = availCols[Math.floor(Math.random() * availCols.length)];
         const randRow = getAvailRow(randCol);
         gameState[randRow][randCol] = '2';
@@ -245,6 +250,8 @@ function randomComputerMove() {
     }
 }
 
+// Return lowest row on the selected column to mimic the piece dropping to the
+// bottom of the board
 function getAvailRow(column) {
     for (let i = 5; i >= 0; i--) {
         if (gameState[i][column] === "") {
