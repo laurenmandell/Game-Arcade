@@ -42,7 +42,7 @@ function getNumPlayers() {
 // Interact with the user by responding to clicks on the cells
 // and changing the cell state. 
 //
-function handleCellPlayed(clickedCell, clickedCol, availRow) {
+function handleCellPlayed(clickedCol, availRow) {
     let targetCellIndex = (availRow * numCols) + clickedCol;
     let targetCell = cells[targetCellIndex];
     gameState[availRow][clickedCol] = currentPlayer;
@@ -54,14 +54,8 @@ function handleCellClick(clickedCellEvent) {
     const clickedCellIndex = parseInt(clickedCell.getAttribute('data-cell-index'));
 
     let clickedCol = clickedCellIndex % 7;
-    let availRow = -1;
-    for (let i = 5; i >= 0; i--) {
-        if (gameState[i][clickedCol] === "") {
-            availRow = i;
-            break;
-        }
-    };
 
+    let availRow = getAvailRow(clickedCol)
     if (availRow === -1 || !gameActive) {
         return;
     }
@@ -69,7 +63,7 @@ function handleCellClick(clickedCellEvent) {
     // we respond to a click by handling the cell that has been played
     // and then updating the overall game status
     //
-    handleCellPlayed(clickedCell, clickedCol, availRow);
+    handleCellPlayed(clickedCol, availRow);
     updateGameStatus();
 }
 
@@ -81,7 +75,7 @@ function updateGameStatus() {
             document.getElementById('resultDisplay').innerText = "Game Draw!";
         } else if (getNumPlayers() === "two") {
             document.getElementById('resultDisplay').innerText = `Player ${result} Wins!`;
-        } else if (result === "1") {
+        } else if (result === '1') {
             document.getElementById('resultDisplay').innerText = `You Win!`;
         } else {
             document.getElementById('resultDisplay').innerText = `You lose!`;
@@ -93,9 +87,9 @@ function updateGameStatus() {
 
 function togglePlayer() {
     currentPlayer = currentPlayer === '1' ? '2' : '1';
-    if (currentPlayer === '2' && gameActive && getNumPlayers() === "one") {
+    if (gameActive && getNumPlayers() === "one" && currentPlayer === '2') {
         document.getElementById('resultDisplay').innerText = "Bot's turn";
-        computerMove();
+        staticEvaluatorComputerMove();
     } else {
         document.getElementById('resultDisplay').innerText = "Player " + currentPlayer + "'s turn";
     }
@@ -196,10 +190,66 @@ function checkDiagonalWin() {
     return false;
 }
 
-function computerMove() { // TODO
-    // Medium difficulty bot
-    // Check if bot can win in next move
-    // Check if player cna win in next move and block them
-    // if no winning or blocking move, make a random move
+function staticEvaluatorComputerMove() {
+    // Medium difficulty bot -- static evaluator
+    // Check for immediate wins
+    for (let c = 0; c < numCols; c++) {
+        let r = getAvailRow(c);
+        if (r !== -1) {
+            // Test for a winning move for bot
+            gameState[r][c] = '2';
+            if (checkWinner() === '2') {
+                handleCellPlayed(c, r)
+                updateGameStatus();
+                return;
+            }
+            gameState[r][c] = ''; // Reset the cell
+        }
+    }
 
+    // Check for immediate blocks
+    for (let c = 0; c < numCols; c++) {
+        let r = getAvailRow(c);
+        if (r !== -1) {
+            // Test for blocking user from winning
+            currentPlayer = '1';
+            gameState[r][c] = '1';
+            if (checkWinner() === '1') {
+                currentPlayer = '2';
+                handleCellPlayed(c, r);
+                updateGameStatus();
+                return;
+            }
+            currentPlayer = '2';
+            gameState[r][c] = ''; // Reset the cell
+        }
+    }
+
+    // Do a random move if there are no possible winning or blocking moves
+    randomComputerMove();
+}
+
+function randomComputerMove() {
+    let availCols = [];
+    for (let c = 0; c < numCols; c++) {
+        if (getAvailRow(c) !== -1) {
+            availCols.push(c);
+        }
+    }
+    if (availCols.length > 0) {
+        const randCol = availCols[Math.floor(Math.random() * availCols.length)];
+        const randRow = getAvailRow(randCol);
+        gameState[randRow][randCol] = '2';
+        handleCellPlayed(randCol, randRow);
+        updateGameStatus();
+    }
+}
+
+function getAvailRow(column) {
+    for (let i = 5; i >= 0; i--) {
+        if (gameState[i][column] === "") {
+            return i;
+        }
+    };
+    return -1;
 }
